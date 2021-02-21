@@ -287,7 +287,8 @@ resource "null_resource" "op_after_attach"  {
 <p align="center"><b>. . .</b></p><br>
 
 <p><b>VPC Endpoints</b> ensures that the data between <b>VPC</b> and <b>S3</b> is transferred within Amazon Network , thereby helps in protecting instances from internet traffic and it could be generated using Terraform resources known as <b>aws_vpc_endpoint and the required parameters are <b>service_name</b> and <b>vpc_id</b> .</p>
-<p><b>service_name</b> should be specified in the rmat <b> “com.amazonawsregion>.<service>” </b> whereas the value of <b>vpc_id</b> is obtained from the aws_vpc resource generated above.</p><br>
+<p><b>service_name</b> should be specified in the format <b> “com.amazonaws._region_._service_” </b> whereas the value of <b>vpc_id</b> is obtained from the aws_vpc resource generated above.</p><br>
+  
 ```hcl
 resource "aws_vpc_endpoint" "s3" {
   vpc_id       = aws_vpc.vpc.id
@@ -403,7 +404,7 @@ resource "time_sleep" "waiting_time" {
 ```
 
 <br>
-<p>As soon as <b>waiting time</b> is over , <b>“local-exec”</b> provisioner enables execution in local system , and in this case , <b>AWS CLI</b> command for making a specific object publicly accessible is performed as the public access to bucket doesn’t ensure public access to the objects within it , so to make a object publicly accessible , the permission has to be provided separately for the object as well, in our case , the object “freddie_mercury.jpg” has been provided “public-read” access.</p>
+<p>As soon as <b>waiting time</b> is over , <b>“local-exec”</b> provisioner enables execution in local system , and in this case , <b>AWS CLI</b> command for making a specific object publicly accessible is performed as the public access to bucket doesn’t ensure public access to the objects within it , so to make a object publicly accessible , the permission has to be provided separately for the object as well, in our case , the object <b>“freddie_mercury.jpg”</b> has been provided <b>“public-read”</b> access.</p>
 
 ```hcl
 resource "null_resource" "codepipeline_cloudfront" {
@@ -611,10 +612,20 @@ output "instance_public_ip" {
 /usr/local/bin/terraform destroy -auto-approve -lock=false -input=false
 ```
 
+<p><b>terraform init</b> installs the required plugins to build the infrastructure</p>
+<p><b>terraform plan</b> provides the order in which execution would be done</p>
+<p><b>terraform apply</b> sets up the complete infrastructure</p>
+<p><b>terraform destroy</b> destroys the complete infrastructure</p>
+<p><b>aws configure set</b> is used for setting up security credentials</p>
+
 <h2>Note</h2>
 <p>To learn how to create an GitHub <b>OAuth Token</b> , check this link</p>
 https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
 
+<br>
+<p><b>depends_on</b> is used in Terraform as execution in Terraform doesn’t takes place in sequential manner , it would create problem in setting up infrastructure if resource dependent on other resources is executed first and many more cases so as to maintain a proper order of execution, it is used.</p><br>
+
+<p><b>tags</b> are used in Terraform for defining key and values and associating it with the resources.</p><br><br>
 
 <h2>Thank You :smiley:<h2>
 <h3>LinkedIn Profile</h3>

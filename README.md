@@ -286,7 +286,7 @@ resource "null_resource" "op_after_attach"  {
 
 <p align="center"><b>. . .</b></p><br>
 
-<p><b>VPC Endpoints</b> ensures that the data between <b>VPC</b> and <b>S3</b> is transferred within Amazon Network , thereby helps in protecting instances from internet traffic and it could be generated using Terraform resources known as <b>aws_vpc_endpoint and the required parameters are <b>service_name</b> and <b>vpc_id</b> .</p>
+<p><b>VPC Endpoints</b> ensures that the data between <b>VPC</b> and <b>S3</b> is transferred within Amazon Network , thereby helps in protecting instances from internet traffic and it could be generated using Terraform resources known as <b>aws_vpc_endpoint</b> and the required parameters are <b>service_name</b> and <b>vpc_id</b> .</p>
 <p><b>service_name</b> should be specified in the format <b> “com.amazonaws._region_._service_” </b> whereas the value of <b>vpc_id</b> is obtained from the aws_vpc resource generated above.</p><br>
   
 ```hcl
@@ -309,7 +309,7 @@ resource "aws_vpc_endpoint_route_table_association" "verta_public" {
 <br>
 
 <p><b>S3</b> , an abbreviation of <b>Simple Storage Service</b> is a public cloud storage resource , an object level storage and provides S3 <b>buckets</b> , which are similar to file folders , consisting of data and its metadata. It could be generated using Terraform resource known as <b>aws_s3_bucket</b> and it depends on null_resource i.e, op_after_attach and there are as such no required parameters except if website is used , under which <b>index_document</b> is a required parameter.</p>
-<p>In this case, <b>“t1-aws-terraform”</b> has been declared as bucket , <b>acl</b> i.e. <b>Access Control Lists</b> for bucket has been set to <b>“public-read ”</b>, <b>region</b> has been specified <b>“ap-south-1”</b> and <b>force_destroy</b> has been set to true so as to delete bucket with objects within it without error. Under website, the <b>index_document</b> has been set to “index.html”.</p>
+<p>In this case, <b>“t1-aws-terraform”</b> has been declared as bucket , <b>acl</b> i.e. <b>Access Control Lists</b> for bucket has been set to <b>“public-read ”</b> and <b>force_destroy</b> has been set to true so as to delete bucket with objects within it without error. Under website, the <b>index_document</b> has been set to “index.html”.</p>
 
 ```hcl
 resource "aws_s3_bucket" "task_bucket" {
@@ -319,7 +319,6 @@ resource "aws_s3_bucket" "task_bucket" {
   ]
   bucket = "t1-aws-terraform"
   acl    = "public-read"
-  region = "ap-south-1"
   force_destroy = "true"
   website{
     index_document = "index.html"
@@ -361,7 +360,7 @@ resource "aws_codepipeline" "task_codepipeline" {
       output_artifacts = ["source_output"]
       
       configuration = {
-        Owner = "satyamcs1999"
+        Owner = "thespecguy"
         Repo = "terraform_aws_jenkins"
         Branch = "master"
         OAuthToken = "****************************"

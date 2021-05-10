@@ -27,7 +27,7 @@ provider "aws" {
 
 ```hcl
 data "aws_availability_zones" "task_az" {
-  blacklisted_names = ["ap-south-1c"]
+  exclude_names = ["ap-south-1c"]
 }
 ```
 

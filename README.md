@@ -23,7 +23,7 @@ provider "aws" {
 <p align="center"><b>. . .</b></p><br>
 
 
-<p>Here, availability zone “ap-south-1c ” is blacklisted as the instance type (which is specified in AWS Instance Resource) is not available in this particular Availability Zone.</p><br>
+<p>Here, availability zone “ap-south-1c ” is excluded as the instance type (which is specified in AWS Instance Resource) is not available in this particular Availability Zone.</p><br>
 
 ```hcl
 data "aws_availability_zones" "task_az" {

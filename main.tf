@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 data "aws_availability_zones" "task_az" {
-  blacklisted_names = ["ap-south-1c"]
+  exclude_names = ["ap-south-1c"]
 }
 
 resource "tls_private_key" "tlskey" {
@@ -193,7 +193,6 @@ resource "aws_s3_bucket" "task_bucket" {
   ]
   bucket = "t1-aws-terraform"
   acl    = "public-read"
-  region = "ap-south-1"
   force_destroy = "true"
   website{
     index_document = "index.html"
